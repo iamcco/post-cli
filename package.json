@@ -1,10 +1,10 @@
 {
   "name": "post-cli",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "simple blog post engine",
   "main": "index.js",
   "bin": {
-    "post": "babel-node ./bin/post.js"
+    "post": "./bin/post.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
