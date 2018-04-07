@@ -2,7 +2,7 @@
   "name": "post-cli",
   "version": "1.0.5",
   "description": "simple blog post engine",
-  "main": "index.js",
+  "main": "lib/index.js",
   "bin": {
     "post": "./bin/post.js"
   },
@@ -10,6 +10,7 @@
     "build": "babel ./src --out-dir lib",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": "https://github.com/iamcco/post-cli",
   "author": "年糕小豆汤 <ooiss@qq.com>",
   "license": "ISC",
   "dependencies": {
