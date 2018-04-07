@@ -3,8 +3,8 @@ import path from 'path'
 import md5 from 'md5'
 import yaml from 'yamljs'
 import jsonfile from 'jsonfile'
-import util from './src/util'
-import config from './src/config'
+import util from './util'
+import config from './config'
 
 const {
   readdirSync,

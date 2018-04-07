@@ -1,3 +1,3 @@
-#!/usr/bin/env babel-node
+#!/usr/bin/env node
 
-import '../index.js'
+require('../lib/index.js')
