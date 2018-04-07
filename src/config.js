@@ -1,23 +1,31 @@
+import fs from 'fs'
 import path from 'path'
 import jsonfile from 'jsonfile'
 
 const defaultConfig = {
   url: '/',
-  source: './source',
+  post: './post',
   public: './public'
 }
 
 const cwd = process.cwd()
 
-const configFilePath = path.join(cwd, './.startrc')
+const configFilePath = path.join(cwd, './post-config.json')
 
 let config = {
-  ...defaultConfig,
-  ...jsonfile.readFileSync(configFilePath)
+  ...defaultConfig
+}
+
+// post-config.json exists
+if (fs.existsSync(configFilePath)) {
+  config = {
+    ...config,
+    ...jsonfile.readFileSync(configFilePath)
+  }
 }
 
 export default {
   ...config,
-  source: path.join(cwd, config.source),
+  post: path.join(cwd, config.post),
   public: path.join(cwd, config.public)
 }

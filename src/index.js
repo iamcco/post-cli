@@ -7,16 +7,18 @@ import util from './util'
 import config from './config'
 
 const {
+  writeFileSync,
   readdirSync,
   increaseId: id
 } = util
 
-const list = readdirSync(config.source)
+const list = readdirSync(config.post)
 
 const db = {
   posts: {},
   categories: {},
-  tags: {}
+  tags: {},
+  config
 }
 
 while (list.length) {
@@ -27,13 +29,13 @@ while (list.length) {
     list.push(...readdirSync(target))
   } else if (stat.isFile()) {
     const targetId = id()
-    const categories = path.dirname(path.relative(config.source, target)).split(path.sep)
+    const categories = path.dirname(path.relative(config.post, target)).split(path.sep)
 
     const raw = fs.readFileSync(target, { encoding: 'utf-8' })
     const items = raw.split(/\n---*\n/)
     const postConfig = yaml.parse(items.shift())
     const md = items.join('\n---\n')
-    const relativePath = path.relative(config.source, target)
+    const relativePath = path.relative(config.post, target)
 
     // post
     db.posts[targetId] = {
@@ -63,9 +65,11 @@ while (list.length) {
 }
 
 Object.values(db.posts).forEach(post => {
-  util.writeFileSync(path.join(config.public, post.relativePath), post.md)
+  writeFileSync(path.join(config.public, post.relativePath), post.md)
   delete post.public
   delete post.md
 })
 
 jsonfile.writeFileSync(path.join(config.public, 'db.json'), db)
+
+console.log('Done')
